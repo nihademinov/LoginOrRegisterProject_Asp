@@ -18,7 +18,8 @@ builder.Services.AddDbContext<Login_DB_Context>(op=>op.UseSqlServer(builder.Conf
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Program>());
-builder.Services.AddSingleton<RegisterService>();
+builder.Services.AddScoped<RegisterService>();
+builder.Services.AddScoped<LoginService>();
 
 
 var app = builder.Build();
@@ -45,6 +46,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=LoginOrRegister}/{action=LoginOrRegisterUser}/{id?}");
+    pattern: "{controller=Login}/{action=LoginUser}/{id?}");
 
 app.Run();
